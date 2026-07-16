@@ -35,12 +35,16 @@ export default function CodingPage() {
         body: JSON.stringify({ prompt, language, task })
       });
       
-      if (!res.ok) throw new Error('API Error');
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(`API Error: ${res.status} - ${errText}`);
+      }
+      
       const data = await res.json();
       setOutput(data.output);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      setOutput('// An error occurred while generating code. Please try again.');
+      setOutput(`// An error occurred while generating code:\n// ${error.message || error}`);
     } finally {
       setLoading(false);
     }

@@ -33,13 +33,19 @@ export default function ChatPage() {
         body: JSON.stringify({ prompt, threadId: 'thread-123' })
       });
       
-      if (!res.ok) throw new Error('API Error');
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(`API Error: ${res.status} - ${errText}`);
+      }
       const data = await res.json();
-      setMessages((prev) => [...prev, { role: 'assistant', content: data.message }]);
-    } catch (error) {
+      
+      const botMessage = { role: 'assistant', content: data.reply };
+      setMessages(prev => [...prev, botMessage]);
+    } catch (error: any) {
       console.error(error);
-      setMessages((prev) => [...prev, { role: 'assistant', content: 'An error occurred while communicating with the AI. Please try again.' }]);
-    }
+      const errorMessage = { role: 'assistant', content: `Sorry, an error occurred: ${error.message || error}. Please try again.` };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally { };
   };
 
   return (
