@@ -26,7 +26,7 @@ export default function CodingPage() {
       
       const authText = await authRes.text();
       if (!authRes.ok) {
-        throw new Error(`Auth API Error: ${authRes.status} - ${authText.substring(0, 100)}`);
+        throw new Error(`Auth API Error: ${authRes.status} on URL ${apiUrl}/auth/login - ${authText.substring(0, 100)}`);
       }
       
       let authData;
