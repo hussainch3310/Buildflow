@@ -36,7 +36,8 @@ export class OpenAIProvider implements IAIProvider {
       };
     } catch (error: any) {
       console.error('OpenAI generation error:', error);
-      throw new InternalServerErrorException('Failed to generate AI response');
+      const msg = error?.error?.message || error?.message || 'Unknown OpenAI error';
+      throw new InternalServerErrorException(`Failed to generate AI response: ${msg}`);
     }
   }
 
