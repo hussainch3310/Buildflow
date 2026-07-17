@@ -32,7 +32,8 @@ export class GeminiProvider implements IAIProvider {
       };
     } catch (error: any) {
       console.error('Gemini generation error:', error);
-      throw new InternalServerErrorException('Failed to generate AI response');
+      const msg = error?.message || 'Unknown Gemini error';
+      throw new InternalServerErrorException(`Failed to generate AI response: ${msg}`);
     }
   }
 
