@@ -23,7 +23,18 @@ export default function CodingPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: 'test@buildflow.ai', password: 'test' })
       });
-      const authData = await authRes.json();
+      
+      const authText = await authRes.text();
+      if (!authRes.ok) {
+        throw new Error(`Auth API Error: ${authRes.status} - ${authText.substring(0, 100)}`);
+      }
+      
+      let authData;
+      try {
+        authData = JSON.parse(authText);
+      } catch (e) {
+        throw new Error(`Auth API Error: Expected JSON but received HTML/Text. URL: ${apiUrl}/auth/login`);
+      }
       const token = authData.accessToken;
 
       // 2. Generate code
@@ -36,12 +47,18 @@ export default function CodingPage() {
         body: JSON.stringify({ prompt, language, task })
       });
       
+      const resText = await res.text();
       if (!res.ok) {
-        const errText = await res.text();
-        throw new Error(`API Error: ${res.status} - ${errText}`);
+        throw new Error(`API Error: ${res.status} - ${resText.substring(0, 100)}`);
       }
       
-      const data = await res.json();
+      let data;
+      try {
+        data = JSON.parse(resText);
+      } catch (e) {
+        throw new Error(`API Error: Expected JSON but received HTML/Text. URL: ${apiUrl}/ai-coding/generate`);
+      }
+      
       setOutput(data.output);
     } catch (error: any) {
       console.error(error);
