@@ -17,7 +17,10 @@ export default function CodingPage() {
     
     try {
       // 1. Get dev token
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+      let apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+      if (apiUrl && !apiUrl.startsWith('http://') && !apiUrl.startsWith('https://')) {
+        apiUrl = `https://${apiUrl}`;
+      }
       const authRes = await fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
