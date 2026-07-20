@@ -47,35 +47,35 @@ export function CommandMenu() {
             </Command.Empty>
             
             <Command.Group heading="Toolkits" className="p-1 text-xs font-medium text-muted-foreground">
-              <Command.Item onSelect={() => runCommand(() => router.push('/'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent">
+              <Command.Item onSelect={() => runCommand(() => router.push('/'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 hover:bg-accent">
                 <LayoutDashboard className="mr-2 h-4 w-4" />
                 <span>Dashboard Home</span>
               </Command.Item>
-              <Command.Item onSelect={() => runCommand(() => router.push('/writing'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent">
+              <Command.Item onSelect={() => runCommand(() => router.push('/writing'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 hover:bg-accent">
                 <PenTool className="mr-2 h-4 w-4" />
                 <span>AI Writing Toolkit</span>
               </Command.Item>
-              <Command.Item onSelect={() => runCommand(() => router.push('/coding'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent">
+              <Command.Item onSelect={() => runCommand(() => router.push('/coding'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 hover:bg-accent">
                 <Code2 className="mr-2 h-4 w-4" />
                 <span>AI Coding Toolkit</span>
               </Command.Item>
-              <Command.Item onSelect={() => runCommand(() => router.push('/chat'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent">
+              <Command.Item onSelect={() => runCommand(() => router.push('/chat'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 hover:bg-accent">
                 <MessageSquare className="mr-2 h-4 w-4" />
                 <span>AI Chat</span>
               </Command.Item>
-              <Command.Item onSelect={() => runCommand(() => router.push('/seo'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent">
+              <Command.Item onSelect={() => runCommand(() => router.push('/seo'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 hover:bg-accent">
                 <Activity className="mr-2 h-4 w-4" />
                 <span>SEO Toolkit</span>
               </Command.Item>
-              <Command.Item onSelect={() => runCommand(() => router.push('/pdf'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent">
+              <Command.Item onSelect={() => runCommand(() => router.push('/pdf'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 hover:bg-accent">
                 <FileText className="mr-2 h-4 w-4" />
                 <span>PDF Toolkit</span>
               </Command.Item>
-              <Command.Item onSelect={() => runCommand(() => router.push('/image'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent">
+              <Command.Item onSelect={() => runCommand(() => router.push('/image'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 hover:bg-accent">
                 <ImageIcon className="mr-2 h-4 w-4" />
                 <span>Image Tools</span>
               </Command.Item>
-              <Command.Item onSelect={() => runCommand(() => router.push('/shopify'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent">
+              <Command.Item onSelect={() => runCommand(() => router.push('/shopify'))} className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 hover:bg-accent">
                 <ShoppingCart className="mr-2 h-4 w-4" />
                 <span>Shopify Integration</span>
               </Command.Item>
