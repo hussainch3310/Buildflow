@@ -1,11 +1,28 @@
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { Edit2, Trash2 } from 'lucide-react';
 
 export default function ProjectsPage() {
-  const projects = [
+  const [projects, setProjects] = useState([
     { name: 'BuildFlow Core', status: 'Active', builds: 142, lastDeploy: '2 hours ago' },
     { name: 'Marketing Site', status: 'Active', builds: 89, lastDeploy: '1 day ago' },
     { name: 'API Gateway v2', status: 'Paused', builds: 34, lastDeploy: '5 days ago' },
-  ];
+  ]);
+
+  const handleDelete = (name: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setProjects(projects.filter(p => p.name !== name));
+  };
+
+  const handleEdit = (name: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    // In a real app, this would open a modal or navigate to an edit page
+    alert(`Edit project: ${name}`);
+  };
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
@@ -21,7 +38,7 @@ export default function ProjectsPage() {
 
       <div className="grid grid-cols-1 gap-4">
         {projects.map((p) => (
-          <div key={p.name} className="flex items-center justify-between p-5 bg-card border border-border rounded-xl hover:border-primary/50 transition-colors cursor-pointer">
+          <div key={p.name} className="flex items-center justify-between p-5 bg-card border border-border rounded-xl hover:border-primary/50 transition-colors cursor-pointer group">
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                 <span className="text-primary font-bold text-sm">{p.name[0]}</span>
@@ -39,6 +56,22 @@ export default function ProjectsPage() {
               <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${p.status === 'Active' ? 'bg-green-500/10 text-green-500' : 'bg-yellow-500/10 text-yellow-500'}`}>
                 {p.status}
               </span>
+              <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button
+                  onClick={(e) => handleEdit(p.name, e)}
+                  className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-md transition-colors"
+                  title="Edit Project"
+                >
+                  <Edit2 className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={(e) => handleDelete(p.name, e)}
+                  className="p-2 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-md transition-colors"
+                  title="Delete Project"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
         ))}
