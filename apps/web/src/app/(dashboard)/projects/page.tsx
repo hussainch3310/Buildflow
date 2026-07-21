@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function ProjectsPage() {
   const projects = [
     { name: 'BuildFlow Core', status: 'Active', builds: 142, lastDeploy: '2 hours ago' },
@@ -12,9 +14,9 @@ export default function ProjectsPage() {
           <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
           <p className="text-muted-foreground mt-1">Manage your CI/CD pipelines and repositories.</p>
         </div>
-        <button className="px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">
+        <Link href="/projects/new" className="px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">
           + New Project
-        </button>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 gap-4">
