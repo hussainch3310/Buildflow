@@ -17,7 +17,8 @@ export default function WritingPage() {
     
     try {
       // 1. Get dev token
-      const authRes = await fetch('http://localhost:4000/auth/login', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+      const authRes = await fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: 'test@buildflow.ai', password: 'test' })
@@ -26,7 +27,7 @@ export default function WritingPage() {
       const token = authData.accessToken;
 
       // 2. Generate copy
-      const res = await fetch('http://localhost:4000/ai-writing/generate', {
+      const res = await fetch(`${apiUrl}/ai-writing/generate`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
