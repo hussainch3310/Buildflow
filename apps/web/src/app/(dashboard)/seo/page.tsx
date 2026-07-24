@@ -1,10 +1,20 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function SEOPage() {
   const [url, setUrl] = useState('');
+  const [recentUrls, setRecentUrls] = useState<string[]>([]);
   const [audited, setAudited] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('recentAuditedUrls');
+    if (saved) {
+      try {
+        setRecentUrls(JSON.parse(saved));
+      } catch (e) {}
+    }
+  }, []);
 
   const [metrics, setMetrics] = useState<{label: string, score: number, color: string, bg: string}[]>([]);
   const [issues, setIssues] = useState<{type: string, msg: string}[]>([]);
@@ -41,6 +51,10 @@ export default function SEOPage() {
       setMetrics(data.metrics);
       setIssues(data.issues);
       setAudited(true);
+
+      const updatedRecents = [url, ...recentUrls.filter(u => u !== url)].slice(0, 5);
+      setRecentUrls(updatedRecents);
+      localStorage.setItem('recentAuditedUrls', JSON.stringify(updatedRecents));
     } catch (error) {
       console.error(error);
       alert('Failed to audit URL. Make sure it is a valid, accessible website.');
@@ -60,11 +74,17 @@ export default function SEOPage() {
       <div className="bg-card border border-border rounded-xl p-5">
         <div className="flex gap-3">
           <input
+            list="recent-urls"
             className="flex-1 px-4 py-2.5 bg-background border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             placeholder="https://yourwebsite.com"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
+          <datalist id="recent-urls">
+            {recentUrls.map((u, i) => (
+              <option key={i} value={u} />
+            ))}
+          </datalist>
           <button onClick={audit} disabled={loading || !url.trim()}
             className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 disabled:opacity-50">
             {loading ? 'Auditing...' : 'Run Audit'}
